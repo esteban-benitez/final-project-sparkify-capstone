@@ -28,7 +28,9 @@ Github project consists of the following,
          This markdown holds various information on the github repository.  My basic solution of the initial dataset were threefold,
             1.  Pysparks Machine Learning API requires vectorization
             2.  The data sets contains non numerical values, given this and the large data size, Pipeline is:
-                    * StringIndexer => VectorAssembler => StandardScaler => ChiSqSelector => kMeans 
+                    * StringIndexer => VectorAssembler => kMeans 
+            3.  Filter data set based on clustering prediction
+                    * VectorAssembler => GeneralizedLinearRegression
             
 Reflection:
     The main difficulties in compiling this experiment and analysis was the computing resources required to implement the pyspark ML libraries.  We did utilize the IBM computing cloud, yet were limited to the free tier, and a monthly aggregation of instance hours.  Initially we tried to comput the analysis locally, yet had not the forethought to break the data set into a much smaller and manageable size.  Once, the data was broken into around 50 users, the local instances computed rather quickly and allowed for more breathing room when compiling the entire data set within the IBM cloud.  Another difficulty was the inability to apply the ParamGridBuilder either locally, or from within the IBM cloud.  Multiple questions were posed to the Mentor Udacity Resource, without an appropriate response.  Rather, I circumvented this scenario by implementing each parameter individually, and attaching the results to a list which was used to compare the hyper parameter improvements, or "lack thereof".
