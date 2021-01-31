@@ -4,24 +4,34 @@
 
 There are two jupyter notebooks to satisfy the requirements of this capstone project.  As the data is extremely large for a local instance, and my IBM cluster utilized all lite instances; I had to split the notebooks into two.  The first notebook is merely an exploratory phase, to understand the data, and to gain insights for how to compute the purpose of churn rates.  While the notebooks are related and utilize the same dataset, the library requirements do differ slightly.  Due to professional considerations, the dataset, and vectorized model data will not be published to github.
 
-Libraries required:
+#### Libraries required:
 
-* os, sys, requests
+* pyspark.sql: SparkSession, functions.col, functions as F, min, max, count, array
+* pyspark.ml: 
+    Pipeline, regression.GeneralizedLinearRegression, feature.VectorAssembler, StringIndexer
+    clustering.KMeans, evaluation.RegressionEvaluator, MultiClassificaitonEvaluator, ClusteringEvaluator
+    Tuning.CrossValidator, ParamGridBuilder
 * pandas, numpy
 * plotly, matplotlib
-* pyspark
 
-Motivation for the captsone outside the realm of completing the project requirements include, a lifelong desire to merge mathematics, and computer science in an applicable, and industrious way.  As technology has taken hold, it is machine learning which seems to satisfy this niche pursuit in a more than satisfactory way.
+##### Motivation:
 
-Github project consists of the following,
+Motivation for the captsone outside the realm of completing the project requirements include, a lifelong desire to merge mathematics, and computer science in an applicable, and industrious way.  As technology has taken hold, it is machine learning which seems to satisfy this niche pursuit in a more than satisfactory way.  The general pursuit of the Sparkify project is to determine marketing campaigns in specific customer targeting scenarios at point in time, such that customer's grouped based on their subscription type, might improve the companies bottom line.  We aim to predict the customer's subscription status, in order to increase, or maintain the number of paid subscriptions.
+
+#### Github project consists of the following,
     
     jupyter notebook -- sparkify_capstone.ipynb:
     -----------------------------------------------
-         * The jupyter notebook of python code used in numerical calcualtions.
+         * The jupyter notebook of python code used in numerical calcualtions.  Here we apply the kmeans clustering algorithm, after which is applied we break the
+         groups out on their respective prediction cluster, and separate the free from the paid users.  The GeneralizedLinearRegression is then applied to each of 3
+         clusters between the paid and the freed, with the necessary root mean squared error used to judge the accuracy of the GLM Model, and specified hyper
+         tuning.
          
     jupyter notebook -- exploratory analysis.ipynb:
     -----------------------------------------------
-         * The jupyter notebook utilized for exploratory analysis.
+         * The jupyter notebook utilized for exploratory analysis.  Plot out the visualization based on length of sessions between the paid and free users.  As such
+         we look for visual discrepencies between normality, and non parametric methods.  We also utilize the correlations between to justify that each metric can 
+         a quanititative effect on the level index.
  
     markdown -- README.md:
     ----------------------
@@ -31,10 +41,24 @@ Github project consists of the following,
                     * StringIndexer => VectorAssembler => kMeans 
             3.  Filter data set based on clustering prediction
                     * VectorAssembler => GeneralizedLinearRegression
+                    
+                    
+#### Summary of Results:
             
-Reflection:
-    The main difficulties in compiling this experiment and analysis was the computing resources required to implement the pyspark ML libraries.  We did utilize the IBM computing cloud, yet were limited to the free tier, and a monthly aggregation of instance hours.  Initially we tried to comput the analysis locally, yet had not the forethought to break the data set into a much smaller and manageable size.  Once, the data was broken into around 50 users, the local instances computed rather quickly and allowed for more breathing room when compiling the entire data set within the IBM cloud.  Another difficulty was the inability to apply the ParamGridBuilder either locally, or from within the IBM cloud.  Multiple questions were posed to the Mentor Udacity Resource, without an appropriate response.  Rather, I circumvented this scenario by implementing each parameter individually, and attaching the results to a list which was used to compare the hyper parameter improvements, or "lack thereof".
+#### Reflection:
+   
+The main difficulties in compiling this experiment and analysis was the computing resources required to implement the pyspark ML libraries.  We did utilize the IBM computing cloud, yet were limited to the free tier, and a monthly aggregation of instance hours.  Initially we tried to comput the analysis locally, yet had not the forethought to break the data set into a much smaller and manageable size.  Once, the data was broken into around 50 users, the local instances computed rather quickly and allowed for more breathing room when compiling the entire data set within the IBM cloud.  Another difficulty was the inability to apply the ParamGridBuilder either locally, or from within the IBM cloud.  Multiple questions were posed to the Mentor Udacity Resource, without an appropriate response.  Rather, I circumvented this scenario by implementing each parameter individually, and attaching the results to a list which was used to compare the hyper parameter improvements, or "lack thereof".
     
-Improvement:
-    There are several features which could be included to improve the current implementation.  The first of which would be to implement the regression withing the pyspark pipeline, as opposed to its current graphical solution utilized by the Pandas library.  Basing additional regression tests on multiple  sub section metrics of the data, might also implement improvement to the analysis, while simultaneously dealing with the issue, and current reasoning that each metric is based on a point in time.  A particular users' session Id, identifies their current play listing, and subscription status, and for essence we calculate the specific cluster they might inherit, at that point in time, and utilize a regression metric to identify that groups future subscription likleyhood.  Also, perhaps the paramGridBuilder could be further explored to improve the hyper parameter tuning, in a more advanced ml pipeline.  
-    We might also consider a more accurate, data checking tests.  As opposed to just comparing the cluster prediction with the current 2-dimensional system of paid, and free users.  The data might be broken up, again as paid and free, yet also split the timeseries data into two sections, with just a single session ID, left to verify the results of the predefined analysis.
+#### Improvement:
+
+There are several features which could be included to improve the current implementation.  The first of which would be to implement the regression withing the pyspark pipeline, as opposed to its current graphical solution utilized by the Pandas library.  Basing additional regression tests on multiple  sub section metrics of the data, might also implement improvement to the analysis, while simultaneously dealing with the issue, and current reasoning that each metric is based on a point in time.  A particular users' session Id, identifies their current play listing, and subscription status, and for essence we calculate the specific cluster they might inherit, at that point in time, and utilize a regression metric to identify that groups future subscription likleyhood.  Also, perhaps the paramGridBuilder could be further explored to improve the hyper parameter tuning, in a more advanced ml pipeline.  
+
+We might also consider a more accurate, data checking tests.  As opposed to just comparing the cluster prediction with the current 2-dimensional system of paid, and free users.  The data might be broken up, again as paid and free, yet also split the timeseries data into two sections, with just a single session ID, left to verify the results of the predefined analysis.
+
+#### Acknowledgements:
+
+We would like to say thank you to Udacity for the large library of information, and dedicated lessons created to teach the necessary skills to become a Data Scientist.  Also the support, and recomendation to scour blogs, apis, additional documentation, how-tos, etc to supplement your curriculum.  Additional thanks to the project reviewers, and mentors who answered questions swiftly.  In addition to those that came before, we extends thanks to Apache Spark for implementing the distributed system environment and contributing to open source.  We also commend the following authors for their contributions to the science of data:
+    
+[1] Firdaus, Afrizal. "Bisecting Kmeans Clustering." Medium, Medium, 9 May 2020, medium.com/@afrizalfir/bisecting-kmeans-clustering-5bc17603b8a2.
+[2] KAUSHIK, SAURAV. "Clustering: Types Of Clustering: Clustering Applications." Analytics Vidhya, 18 Oct. 2020, www.analyticsvidhya.com/blog/2016/11/an-introduction-to-clustering-and-different-methods-of-clustering/.
+[3] Stephanie Glen. "RMSE: Root Mean Square Error" From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/probability-and-statistics/regression-analysis/rmse-root-mean-square-error/
