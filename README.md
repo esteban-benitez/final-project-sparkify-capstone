@@ -44,6 +44,24 @@ Motivation for the captsone outside the realm of completing the project requirem
                     
                     
 #### Summary of Results:
+We processed 543705 rows of data and when broken into three k = 3 clusters, the evaluation accuracy is only 54%, which should be expected, given that the data contains only two groups, “paid”, and “free”. When evaluated with only 2 clustering groups, k = 2 we achieve a 27% accuracy rating, which is indicative of proper clustering placements. The clustering evaluator for k = 3, provides a score of -0.07212799045115308, for k = 2, 0.015491645537876866.
+
+Free Users:
+-----------
+Cluster 0 has a slope of -2.530473632235824e-10 indicating: 
+     These users will stay
+Cluster 1 has a slope of -3.179434015818414e-10 indicating: 
+     these users might downgrade
+Cluster 2 has a slope of -7.591706795140503e-10 indicating: 
+     these might leave altogether
+Paid Users:
+-----------
+Cluster 0 has a slope of -1.9949623791887178e-10 indicating: 
+     these users might upgrade
+Cluster 1 has a slope of -2.493610749731137e-10 indicating: 
+     these will continue free service
+Cluster 2 has a slope of -5.059036390144245e-10 indicating: 
+     these users probably leave the service altogether
             
 #### Reflection:
    
