@@ -80,3 +80,4 @@ We would like to say thank you to Udacity for the large library of information, 
 [1] Firdaus, Afrizal. "Bisecting Kmeans Clustering." Medium, Medium, 9 May 2020, medium.com/@afrizalfir/bisecting-kmeans-clustering-5bc17603b8a2.
 [2] KAUSHIK, SAURAV. "Clustering: Types Of Clustering: Clustering Applications." Analytics Vidhya, 18 Oct. 2020, www.analyticsvidhya.com/blog/2016/11/an-introduction-to-clustering-and-different-methods-of-clustering/.
 [3] Stephanie Glen. "RMSE: Root Mean Square Error" From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/probability-and-statistics/regression-analysis/rmse-root-mean-square-error/
+[4] Wikipedia contributors. (2021, January 26). Normal distribution. In Wikipedia, The Free Encyclopedia. Retrieved 01:55, February 1, 2021, from https://en.wikipedia.org/w/index.php?title=Normal_distribution&oldid=1002951236
