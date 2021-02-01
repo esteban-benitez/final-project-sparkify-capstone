@@ -62,7 +62,23 @@ We processed 543705 rows of data and when broken into three k = 3 clusters, the 
          these will continue free service
     Cluster 2 has a slope of -5.059036390144245e-10 indicating: 
          these users probably leave the service altogether
-            
+
+The model is evaluated for it's accuracy of predicting the regression based analysis of predicting the length of each user's session, utilizing the root mean squared error, such that the smaller value indicates higher accuracy of the model.  The hyper parameter tuning was conducted on Gaussian, and Gamma distributions.
+
+    Free:
+               Gaussian           Gamma
+    Cluster 0: 97.32010175753923  97.32234392541109
+    Cluster 1: 93.11747843700327  93.10982280439835
+    Cluster 2: 116.64181787949359 116.60559496512755
+    --------------------------------------------------------------------Paid:
+               Gaussian           Gamma
+    Cluster 0: 95.14288236629696  95.14288234267099
+    Cluster 1: 94.02797858398525  94.02797495408264
+    Cluster 2: 115.00386573617652 115.00460904112288
+    
+To quantify the accuracy of the multiclass model where the user can either downgrade, upgrade, or drop service completely, is only interrogated based on two metrics for their level of subscription, free, and paid.  When evaluated with only 2 clustering groups, k = 2 we achieve a 27% accuracy rating, which is indicative of proper clustering placements. The clustering evaluator for k = 3, provides a score of -0.07212799045115308, for k = 2, 0.015491645537876866.
+
+
 #### Reflection:
    
 The main difficulties in compiling this experiment and analysis was the computing resources required to implement the pyspark ML libraries.  We did utilize the IBM computing cloud, yet were limited to the free tier, and a monthly aggregation of instance hours.  Initially we tried to comput the analysis locally, yet had not the forethought to break the data set into a much smaller and manageable size.  Once, the data was broken into around 50 users, the local instances computed rather quickly and allowed for more breathing room when compiling the entire data set within the IBM cloud.  Another difficulty was the inability to apply the ParamGridBuilder either locally, or from within the IBM cloud.  Multiple questions were posed to the Mentor Udacity Resource, without an appropriate response.  Rather, I circumvented this scenario by implementing each parameter individually, and attaching the results to a list which was used to compare the hyper parameter improvements, or "lack thereof".
